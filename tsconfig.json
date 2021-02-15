@@ -8,6 +8,8 @@
     "declaration": true,
     "outDir": "./dist",
     "forceConsistentCasingInFileNames": true,
-    "strict": true
-  }
+    "strict": true,
+    "strictNullChecks": true
+  },
+  "include": ["./src"]
 }

@@ -1,6 +1,7 @@
 import Case from 'case'
-import { ProjectFile } from './abstractions/ProjectFile'
+import { ProjectFile } from './project-file'
 import { IParameters } from './index'
+import { Logger } from './logger'
 
 export async function main({
   name,
@@ -30,22 +31,27 @@ export async function main({
   ProjectFile.setSharedTemplateData(data)
 
   const dirName = directoryNameFormatter(name)
-  await Promise.all([
-    new ProjectFile(
-      dirName,
-      filenameFormatter(`${name}-bloc`) + '.ts',
-      'bloc.ts'
-    ).generate(),
-    new ProjectFile(
-      dirName,
-      data.filenames.eventFile + '.ts',
-      'event.ts'
-    ).generate(),
-    new ProjectFile(
-      dirName,
-      data.filenames.stateFile + '.ts',
-      'state.ts'
-    ).generate(),
-    new ProjectFile(dirName, `index.ts`, 'index.ts').generate(),
-  ])
+
+  try {
+    await Promise.all([
+      new ProjectFile(
+        dirName,
+        filenameFormatter(`${name}-bloc`) + '.ts',
+        'bloc.ts'
+      ).generate(),
+      new ProjectFile(
+        dirName,
+        data.filenames.eventFile + '.ts',
+        'event.ts'
+      ).generate(),
+      new ProjectFile(
+        dirName,
+        data.filenames.stateFile + '.ts',
+        'state.ts'
+      ).generate(),
+      new ProjectFile(dirName, `index.ts`, 'index.ts').generate(),
+    ])
+  } catch (err) {
+    new Logger().error('Generation failed.', err)
+  }
 }

@@ -2,11 +2,11 @@ import fs from 'fs'
 import Mustache from 'mustache'
 import path from 'path'
 import process from 'process'
-import { Logger } from './Logger'
+import { Logger } from './logger'
 
 export class ProjectFile {
   private static sharedTemplateData: any
-  private static outputDir: string
+  private static outputDir: string = ''
 
   static createProjectDir(outputDir: string) {
     ProjectFile.outputDir = outputDir
@@ -33,7 +33,10 @@ export class ProjectFile {
     const directories = this.relativePath.split('/')
     let outputDirTmp = ProjectFile.outputDir
 
-    if (outputDirTmp[outputDirTmp.length - 1] !== '/') {
+    if (
+      outputDirTmp.length > 0 &&
+      outputDirTmp[outputDirTmp.length - 1] !== '/'
+    ) {
       outputDirTmp += '/'
     }
 
@@ -51,22 +54,32 @@ export class ProjectFile {
   }
 
   private create() {
-    const templateDir = path.join(__dirname, '..', '..', 'templates')
+    const templateDir = path.join(__dirname, '..', 'templates')
     const templatePath = `${templateDir}/${this.templateName}.mu`
 
     return new Promise((resolve, reject) => {
       fs.readFile(templatePath, 'utf8', (err, template) => {
         if (err) {
           this.logger.error(`Template ${templatePath} not found.`, err)
-          reject()
+          reject(err)
           return false
         }
 
         const output = Mustache.render(template, ProjectFile.sharedTemplateData)
 
-        fs.writeFile(this.getFilePath(), output, () => {
-          this.logger.info(`CREATED "${process.cwd()}\\${this.getFilePath()}"`)
+        fs.writeFile(this.getFilePath(), output, (err) => {
+          if (err) {
+            reject(err)
+            return
+          } else {
+            this.logger.info(
+              `CREATED "${path.normalize(
+                `${process.cwd()}/${this.getFilePath()}`
+              )}"`
+            )
+          }
           resolve(undefined)
+          return
         })
       })
     })
@@ -74,7 +87,7 @@ export class ProjectFile {
 
   private getFilePath() {
     return path.normalize(
-      `${ProjectFile.outputDir}/${this.relativePath}/${this.fileName}`
+      path.join(ProjectFile.outputDir, this.relativePath, this.fileName)
     )
   }
 
