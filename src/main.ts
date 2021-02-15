@@ -46,6 +46,6 @@ export async function main({
       data.filenames.stateFile + '.ts',
       'state.ts'
     ).generate(),
-    new ProjectFile('', `index.ts`, 'index.ts').generate(),
+    new ProjectFile(dirName, `index.ts`, 'index.ts').generate(),
   ])
 }
