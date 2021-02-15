@@ -21,7 +21,7 @@ export class ProjectFile {
   private templateName: string
 
   constructor(
-    private path: string,
+    private relativePath: string,
     private fileName: string,
     templateName?: string
   ) {
@@ -30,7 +30,7 @@ export class ProjectFile {
   }
 
   private createFolders() {
-    const directories = this.path.split('/')
+    const directories = this.relativePath.split('/')
     let outputDirTmp = ProjectFile.outputDir
 
     if (outputDirTmp[outputDirTmp.length - 1] !== '/') {
@@ -74,7 +74,7 @@ export class ProjectFile {
 
   private getFilePath() {
     return path.normalize(
-      `${ProjectFile.outputDir}/${this.path}/${this.fileName}`
+      `${ProjectFile.outputDir}/${this.relativePath}/${this.fileName}`
     )
   }
 
