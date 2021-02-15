@@ -4,3 +4,5 @@ tests
 .gitignore
 tsconfig.json
 .DS_Store
+test-output
+dev

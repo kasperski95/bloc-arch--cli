@@ -1,23 +1,36 @@
 #!/usr/bin/env node
 
 import { main } from './main'
-import { options } from 'yargs'
+import { command } from 'yargs'
 
-const parameters = options({
-  path: { type: 'string' },
-  name: { type: 'string', demandOption: true },
-  filenameCase: {
-    type: 'string',
-    choices: ['pascal', 'kebab', 'snake', 'camel'],
-    default: 'pascal',
-  },
-  directoryCase: {
-    type: 'string',
-    choices: ['pascal', 'kebab', 'snake', 'camel'],
-    default: 'kebab',
-  },
+export type SupportedNamingConventions = 'pascal' | 'kebab' | 'snake' | 'camel'
+
+export interface Args {
+  name: string
+  path?: string
+  filenameCase: SupportedNamingConventions
+  directoryCase: SupportedNamingConventions
+}
+
+const args = command<Args>('$0 <name>', 'Name', (yargs) => {
+  yargs
+    .positional('name', {
+      type: 'string',
+      demandOption: true,
+    })
+    .options({
+      path: { type: 'string' },
+      filenameCase: {
+        type: 'string',
+        choices: ['pascal', 'kebab', 'snake', 'camel'],
+        default: 'pascal',
+      },
+      directoryCase: {
+        type: 'string',
+        choices: ['pascal', 'kebab', 'snake', 'camel'],
+        default: 'kebab',
+      },
+    })
 }).argv
 
-export type IParameters = typeof parameters
-
-main(parameters)
+main(args)

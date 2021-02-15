@@ -1,19 +1,11 @@
 import Case from 'case'
 import { ProjectFile } from './project-file'
-import { IParameters } from './index'
+import { Args } from './index'
 import { Logger } from './logger'
 
-export async function main({
-  name,
-  filenameCase,
-  path,
-  directoryCase,
-}: IParameters) {
-  let filenameCasing = filenameCase as 'pascal' | 'kebab' | 'snake' | 'camel'
-  let directoryCasing = directoryCase as 'pascal' | 'kebab' | 'snake' | 'camel'
-
-  let filenameFormatter = Case[filenameCasing]
-  let directoryNameFormatter = Case[directoryCasing]
+export async function main({ name, filenameCase, path, directoryCase }: Args) {
+  let filenameFormatter = Case[filenameCase]
+  let directoryNameFormatter = Case[directoryCase]
 
   const data = {
     filenames: {
