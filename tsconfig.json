@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "experimentalDecorators": true,
     "module": "commonjs",
     "esModuleInterop": true,
-    "baseUrl": "src",
-    "emitDecoratorMetadata": true,
+    "baseUrl": "./src",
     "sourceMap": true,
-    "outDir": "out"
+    "declaration": true,
+    "outDir": "./dist",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true
   }
 }
