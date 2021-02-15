@@ -1,6 +1,6 @@
 import { Bloc } from "@bloc-arch/core";
-import * as {{name.pascal}}Events from "./{{name.kebab}}-event";
-import * as {{name.pascal}}States from "./{{name.kebab}}-state";
+import * as {{name.pascal}}Events from "./{{filenames.eventFile}}";
+import * as {{name.pascal}}States from "./{{filenames.stateFile}}";
 
 export class {{name.pascal}}Bloc extends Bloc<
   {{name.pascal}}Events.{{name.pascal}}Event,
