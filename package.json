@@ -1,6 +1,6 @@
 {
   "name": "@bloc-arch/cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create JavaScript or TypeScript boilerplate code for BLoC pattern",
   "bin": {
     "bloc": "./dist/index.js"
