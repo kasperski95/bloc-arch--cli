@@ -6,9 +6,16 @@ import { Args } from './index'
 import { Logger } from './logger'
 import { ProjectFile } from './project-file'
 
-export async function main({ name, filenameCase, path, directoryCase }: Args) {
-  let filenameFormatter = Case[filenameCase]
-  let directoryNameFormatter = Case[directoryCase]
+export async function main({
+  name,
+  filenameCase,
+  path,
+  directoryCase,
+  typescript,
+}: Args) {
+  const filenameFormatter = Case[filenameCase]
+  const directoryNameFormatter = Case[directoryCase]
+  const dotExt = typescript ? '.ts' : '.js'
 
   const data = {
     filenames: {
@@ -39,20 +46,20 @@ export async function main({ name, filenameCase, path, directoryCase }: Args) {
     await Promise.all([
       new ProjectFile(
         dirName,
-        filenameFormatter(`${name}-bloc`) + '.ts',
-        'bloc.ts'
+        filenameFormatter(`${name}-bloc`) + dotExt,
+        'bloc' + dotExt
       ).generate(),
       new ProjectFile(
         dirName,
-        data.filenames.eventFile + '.ts',
-        'event.ts'
+        data.filenames.eventFile + dotExt,
+        'event' + dotExt
       ).generate(),
       new ProjectFile(
         dirName,
-        data.filenames.stateFile + '.ts',
-        'state.ts'
+        data.filenames.stateFile + dotExt,
+        'state' + dotExt
       ).generate(),
-      new ProjectFile(dirName, `index.ts`, 'index.ts').generate(),
+      new ProjectFile(dirName, 'index' + dotExt, 'index' + dotExt).generate(),
     ])
   } catch (err) {
     new Logger().error('Could not create files.', err)

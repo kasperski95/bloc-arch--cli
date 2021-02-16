@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 
-import { main } from './main'
 import { command } from 'yargs'
+import { main } from './main'
 
 export type SupportedNamingConventions = 'pascal' | 'kebab' | 'snake' | 'camel'
 
 export interface Args {
   name: string
-  path?: string
   filenameCase: SupportedNamingConventions
   directoryCase: SupportedNamingConventions
+  typescript: boolean
+  path?: string
 }
 
 const args = command<Args>('$0 <name>', 'Name', (yargs) => {
@@ -29,6 +30,10 @@ const args = command<Args>('$0 <name>', 'Name', (yargs) => {
         type: 'string',
         choices: ['pascal', 'kebab', 'snake', 'camel'],
         default: 'kebab',
+      },
+      typescript: {
+        type: 'boolean',
+        default: false,
       },
     })
 }).argv
