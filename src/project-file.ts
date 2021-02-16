@@ -8,9 +8,8 @@ export class ProjectFile {
   private static sharedTemplateData: any
   private static outputDir: string = ''
 
-  static createProjectDir(outputDir: string) {
+  static setBlocDirectory(outputDir: string) {
     ProjectFile.outputDir = outputDir
-    if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir)
   }
 
   static setSharedTemplateData(data: any) {

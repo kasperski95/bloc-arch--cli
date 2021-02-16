@@ -1,7 +1,10 @@
 import Case from 'case'
-import { ProjectFile } from './project-file'
+import { existsSync } from 'fs'
+import { join } from 'path'
+import process from 'process'
 import { Args } from './index'
 import { Logger } from './logger'
+import { ProjectFile } from './project-file'
 
 export async function main({ name, filenameCase, path, directoryCase }: Args) {
   let filenameFormatter = Case[filenameCase]
@@ -20,12 +23,19 @@ export async function main({ name, filenameCase, path, directoryCase }: Args) {
     },
   }
 
-  if (path) ProjectFile.createProjectDir(path)
-  ProjectFile.setSharedTemplateData(data)
-
-  const dirName = directoryNameFormatter(name)
-
   try {
+    if (path) ProjectFile.setBlocDirectory(path)
+    ProjectFile.setSharedTemplateData(data)
+
+    const dirName = directoryNameFormatter(name)
+
+    const destination = join(process.cwd(), path || '', dirName)
+    if (existsSync(destination)) {
+      throw new Error(
+        `Directory "${destination}" exists. Please remove it or create a bloc with a different name.`
+      )
+    }
+
     await Promise.all([
       new ProjectFile(
         dirName,
@@ -45,6 +55,7 @@ export async function main({ name, filenameCase, path, directoryCase }: Args) {
       new ProjectFile(dirName, `index.ts`, 'index.ts').generate(),
     ])
   } catch (err) {
-    new Logger().error('Generation failed.', err)
+    new Logger().error('Could not create files.', err)
+    process.exit(1)
   }
 }
