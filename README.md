@@ -1,7 +1,7 @@
 # @bloc-arch/cli <!-- omit in toc -->
 ![https://travis-ci.com/kasperski95/bloc-arch--cli.svg?branch=master](https://travis-ci.com/kasperski95/bloc-arch--cli.svg?branch=master)
 
-Create JavaScript or TypeScript boilerplate code for BLoC pattern.
+Create JavaScript or TypeScript boilerplate code for BLoC pattern. Uses @bloc-arch/core.
 
 ## Table of Contents <!-- omit in toc -->
 - [Usage](#usage)

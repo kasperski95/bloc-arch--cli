@@ -7,3 +7,4 @@ tsconfig.json
 test-output
 dev
 *.tgz
+jest.config.js
