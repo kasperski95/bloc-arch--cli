@@ -41,5 +41,14 @@
   "bugs": {
     "url": "https://github.com/kasperski95/bloc-arch--cli/issues"
   },
-  "homepage": "https://github.com/kasperski95/bloc-arch--cli#readme"
+  "homepage": "https://github.com/kasperski95/bloc-arch--cli#readme",
+  "keywords": [
+    "bloc",
+    "state",
+    "management",
+    "business",
+    "logic",
+    "component",
+    "cli"
+  ]
 }
