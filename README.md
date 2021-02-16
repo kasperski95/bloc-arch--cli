@@ -1,4 +1,5 @@
 # @bloc-arch/cli <!-- omit in toc -->
+![https://travis-ci.com/kasperski95/bloc-arch--cli.svg?branch=master](https://travis-ci.com/kasperski95/bloc-arch--cli.svg?branch=master)
 
 Create JavaScript or TypeScript boilerplate code for BLoC pattern.
 
@@ -8,7 +9,7 @@ Create JavaScript or TypeScript boilerplate code for BLoC pattern.
 
 ---
 
-## Usage
+## How to use?
 1. Add package to your project
     ```sh
       npm i @bloc-arch/cli -D
@@ -16,22 +17,17 @@ Create JavaScript or TypeScript boilerplate code for BLoC pattern.
 2. Add following script to your *package.json*
     ```json
     {
-      ...
       "scripts": {
-        ...
-        "bloc": "bloc --path OUTPUT_PATH" // <= add this line
-        ...
+        "bloc": "bloc --path OUTPUT_PATH"
       }
-      ...
     }
-
     ```
 3. Run
     ```sh
     npm run bloc -- "bloc name"
     ```
 
-## Syntax
+## Available flags
 ```sh
 bloc <bloc_name>
   [--path OUTPUT_PATH]
