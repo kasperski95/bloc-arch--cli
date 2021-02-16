@@ -11,6 +11,7 @@ export async function main({ name, filenameCase, path, directoryCase }: Args) {
     filenames: {
       eventFile: filenameFormatter(`${name} event`),
       stateFile: filenameFormatter(`${name} state`),
+      blocFile: filenameFormatter(`${name} bloc`),
     },
     name: {
       camel: Case.camel(name),

@@ -1,5 +1,5 @@
-import * as {{name.pascal}}Events from './{{name.kebab}}-event';
-import * as {{name.pascal}}States from './{{name.kebab}}-state';
-export { {{name.pascal}}Bloc } from './{{name.kebab}}-bloc';
+import * as {{name.pascal}}Events from './{{filenames.eventFile}}';
+import * as {{name.pascal}}States from './{{filenames.stateFile}}';
+export { {{name.pascal}}Bloc } from './{{filenames.blocFile}}';
 export { {{name.pascal}}Events };
 export { {{name.pascal}}States };
