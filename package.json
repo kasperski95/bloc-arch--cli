@@ -9,8 +9,8 @@
     "dev": "ts-node src/index.ts dev",
     "build": "tsc",
     "prepublish": "npm run build",
-    "test": "npm run build && jest",
-    "test:only": "jest"
+    "test": "npm run build && npm run test:only",
+    "test:only": "jest --runInBand"
   },
   "author": "Arkadiusz Kasprzyk",
   "license": "MIT",
